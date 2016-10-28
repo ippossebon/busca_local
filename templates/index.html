@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset="utf-8"/>
+
+  <title> Busca Teste</title>
+
+  <style>
+  h1{
+      color: #0095cd;
+      font-family: Arial, Helvetica, sans-serif;
+  }
+
+  section{
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  /* SearchBox */
+  #tfheader{
+		background-color:#c3dfef;
+	}
+	#searchbox{
+		float:right;
+		padding:20px;
+	}
+	.tftextinput{
+		margin: 0;
+		padding: 5px 15px;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size:14px;
+		border:1px solid #0076a3; border-right:0px;
+		border-top-left-radius: 5px 5px;
+		border-bottom-left-radius: 5px 5px;
+	}
+	.tfbutton {
+		margin: 0;
+		padding: 5px 15px;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size:14px;
+		outline: none;
+		cursor: pointer;
+		text-align: center;
+		text-decoration: none;
+		color: #ffffff;
+		border: solid 1px #0076a3; border-right:0px;
+		background: #0095cd;
+		background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
+		background: -moz-linear-gradient(top,  #00adee,  #0078a5);
+		border-top-right-radius: 5px 5px;
+		border-bottom-right-radius: 5px 5px;
+	}
+	.tfbutton:hover {
+		text-decoration: none;
+		background: #007ead;
+		background: -webkit-gradient(linear, left top, left bottom, from(#0095cc), to(#00678e));
+		background: -moz-linear-gradient(top,  #0095cc,  #00678e);
+	}
+	/* Fixes submit button height problem in Firefox */
+	.tfbutton::-moz-focus-inner {
+	  border: 0;
+	}
+	.tfclear{
+		clear:both;
+	}
+
+  </style>
+</head>
+
+<body>
+  <h1> BUSCA </h1>
+  <section>
+    <article>
+        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </article>
+
+
+  </section>
+
+    <!-- HTML for SEARCH BAR -->
+    <div id="tfheader">
+      <form id="searchbox" method="get" action=".">
+              <input id="search_text" type="text" class="tftextinput" name="q" size="21" maxlength="120">
+
+              <input id="submit_button" type="submit" value="search" class="tfbutton">
+
+      </form>
+    <div class="tfclear"></div>
+    </div>
+
+    <div id="search_results_div" class="ui text container">
+      <h2 class="ui header">Header</h2>
+      <p> Aqui vai o resultado da busca. </p>
+    </div>
+
+    <script>
+      var button = document.getElementById('submit_button');
+
+      button.addEventListener("click", function(e) {
+        var search_text = document.getElementById('search_text').value;
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.open("GET", "/busca?q=" + search_text, true);
+        xhttp.send();
+
+        xhttp.onreadystatechange = function() {
+          if (xhttp.readyState == 4) {
+            document.getElementById('search_results_div').innerHTML = xhttp.responseText;
+          }
+        }
+
+        e.preventDefault();
+
+      });
+
+    </script>
+</body>
+</html>
